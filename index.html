@@ -1,0 +1,44 @@
+<form action="/pythonapp/p.py" method="post" >
+    First Name: <input type="text" name="first_name">  <br><br />
+    Last Name: <input type="text" name="last_name" /> <br /> <br />
+    <b><u>Hobbies</u></b><br />
+    <input type="checkbox" name="fish" value="on" /> Loves fishing<br />
+    <input type="checkbox" name="beer" value="on" /> Loves beer <br /> <br />
+    <b><u>Gender</u></b><br />
+    <input type="radio" name="Gender" value="Male" /> Male
+    <input type="radio" name="Gender" value="Woman" /> Woman <br /><br />
+    
+    <b><u>Describe yourself</u></b><br />
+    <textarea name="textcontent" cols="40" rows="4">
+    Type your text here...
+    </textarea>
+    <br>
+    
+    <b><u>Country</u></b><br />
+    <select name="Country">
+        <option value="Japan" selected>Japan</option>
+        <option value="Canada">Canada</option>
+        <option value="Israel">Israel</option>
+        <option value="Chine">Chine</option>
+        <option value="France">France</option>
+    </select>
+    <input type="submit" value="Submit and set cookies" />
+</form>
+<br />
+
+
+<form action="/pythonapp/retrievecookie.py" method="post" target="_blank">
+    <input type="submit" value="retrievecookie" />
+</form>
+
+<hr />
+<form enctype="multipart/form-data"
+      action="save_file.py" method="post">
+    <p>File: <input type="file" name="filename" /></p>
+    <p><input type="submit" value="Upload" /></p>
+</form>
+
+<hr />
+<form action="/pythonapp/Download.py" method="post" target="_blank">
+    <input type="submit" value="download w7.txt" />
+</form>

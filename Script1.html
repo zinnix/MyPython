@@ -1,0 +1,38 @@
+<html>
+    <body>
+        <script>
+            function ArrayAdditionI(arr) {
+                var sArr = arr.sort(function (a, b) {
+                    return a - b;
+                });
+                var biggest = sArr.pop();
+                document.write(arr, "  --<b>", biggest, "</b>--<br>")
+
+
+
+
+
+                function recursion(start, indx) {
+                    if (start + sArr[indx] === biggest) {
+                        return true;
+                    }
+                     if (sArr.length < indx) {
+                        return false;
+                    }
+                     if (start + sArr[indx] < biggest) {
+                        return recursion(start + sArr[indx], indx + 1) || recursion(start, indx + 1)
+                    }
+                    return false;
+                }
+                return recursion(0, 0);
+            }
+
+
+
+            arr = [34, 30, 87, 21,1,2,18,12]
+            document.write(ArrayAdditionI(arr))
+        </script>
+        
+
+    </body>
+</html>
