@@ -6,6 +6,7 @@ from math import sqrt
 from itertools import count, islice
 
 #Continue
+#Let's learn Ruby
                                       
 exit()
 
