@@ -5,8 +5,7 @@ import statistics
 from math import sqrt
 from itertools import count, islice
 
-
-
+#Continue
                                       
 exit()
 
