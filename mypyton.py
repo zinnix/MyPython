@@ -4,6 +4,294 @@ address = ' '.join(sys.argv[1:])
 
 
 
+#how many numbers are missing to set the array continuous 
+def Consecutive(arr): 
+    
+    #magic solution in one line
+    print (max(arr)-min(arr)-len(arr)+1,"!!!!")
+    arr.sort()
+    compl=1
+    i=0
+    while i<len(arr)-1:
+        n=arr[i]
+        while i<len(arr) and n<arr[i+1]:
+            compl+=1
+            n+=1
+        i+=1
+    return(compl-len(arr))
+
+print ("=========",Consecutive([6,20,10,18]),"=====")
+
+
+
+
+#returns the mode popular item in a list (array)
+def SimpleMode(arr): 
+    return max(arr, key=arr.count)
+print (SimpleMode([10, 4, 5, 2, 4,10,10,4,4,4,10,6]) )
+
+
+
+#return the first word with the greatest number of repeated letters.
+def LetterCount1(str): 
+  maxC = 0
+  maxWord = ""
+  for word in str.split():
+    count = 0
+    for i in range(len(word)):
+      if word[i] in word[i+1:]:        
+        count += 1 
+    if (count > maxC):
+    	maxC = count
+    	maxWord = word
+  if maxC == 0:
+  	return -1
+  else:
+  	return maxWord  
+print (LetterCount1("reeepeatd is a nice coununttrryy with mannny reeppeatd lakes!"))
+
+
+
+# returns the first word with the greatest number of repeated letters
+def LetterCount(str): 
+    def maxcharrepeats(word):        # Canada - 3
+        newword=sorted(word)
+        i=1
+        maxlength=1
+        while i<len(newword)-1 and newword[i].isalpha():
+            currentlength=1
+            while i<len(newword)-1 and newword[i].isalpha() and newword[i]==newword[i+1]:
+                currentlength+=1
+                i+=1
+            if maxlength<currentlength:
+                maxlength=currentlength
+            i+=1
+        if maxlength==1:
+            return -1
+        return maxlength
+    maxlength=1
+    maxword=""
+    currentword=""
+    newarry=str.split(" ")
+    for word in newarry:
+        wordlength=maxcharrepeats(word)
+        if maxlength<wordlength:
+            maxlength=wordlength
+            maxword=word
+    return (maxlength,maxword)
+print (LetterCount("Canada is a nice country with many repeated lakes!"))
+
+
+
+
+def BinaryConverter(str1): 
+    return(int(str(str1),2))
+print(BinaryConverter(100101))
+
+
+import itertools 
+def ArrayAdditionI1(arr): 
+    maxn=max(arr)
+    arr.remove(maxn)
+    for n in range(2,len(arr)):
+        for i in (itertools.combinations(arr,n)):
+            if sum(i)==maxn:
+                return i
+    return -1
+print (ArrayAdditionI1([7,3,5,10,2,-5]))
+
+
+
+#Returns if array is   Arithmetic,     Geometric or none (-1)
+def ArithGeoII(arr): 
+    diffart=arr[0]-arr[1]
+    diffmul=arr[0]/arr[1]
+    i=0
+    art=True
+    mul=True
+    for i in range(0,len(arr)-1):
+        if diffart!=arr[i]-arr[i+1]:
+            art=False
+        if diffmul!=arr[i]/arr[i+1]:
+            mul=False
+    if art:
+        return ("Arithmetic")
+    if mul:
+        return "Geometric"
+    return -1
+print(ArithGeoII([4,14,24,34,44]))
+
+
+#checks if string is substring of bigger string
+def StringScramble(str1,str2): 
+     for c in str2:
+         if not c in str1:
+             return False
+     return True
+
+print (StringScramble("helpmaAto","hpAlmot"))
+
+
+
+#returns greatest common factor
+from fractions import gcd
+def Division(num1,num2): 
+    print (gcd(num1,num2)) 
+    i=min(int(num1/2),int(num2/2))
+    while i>1:
+        if num1%i==0 and num2%i==0:
+            return i
+        i-=1
+    return 1
+print (Division(216,448))
+
+
+
+#returns true if the string is a palindrome (skipping non-characters)
+def PalindromeTwo(str):
+    newstr=("".join(i.lower() if i.isalpha() else "" for i in str))
+    return newstr[::-1]==newstr
+    
+print(PalindromeTwo("Q1Noel - sees Leon1!!!!Q1726381W"))
+
+
+
+#prints how much each char is presented in string
+def RunLength(str1): 
+    print(str1)
+    i=0
+    newstr=""
+    while i<len(str1):
+        counter=0
+        n=i
+        while i<len(str1) and str1[i]==str1[n]:
+            i+=1
+            counter+=1    
+        newstr+=str(counter)+str1[n]
+    return(newstr)
+print(RunLength("aabbcde"))
+
+
+#checks if a number is prime
+from math import sqrt; from itertools import count, islice
+def PrimeTime(n):
+    if n < 2: return False
+    return all(n%i for i in islice(count(2), int(sqrt(n)-1)))
+
+
+
+#How many times to cycle summarizing number's digits to get less then 10
+def AdditivePersistence(num): 
+    def sum_digits(n):
+        t=n
+        sum=0
+        while t>0:
+            sum+=t%10
+            t=int(t/10)
+        return sum
+    if num<10:
+        return(0)
+    AdditiveCounter=1 # total count of cycles
+    currentsum=sum_digits(num)
+    while currentsum>9:
+        currentsum=sum_digits(currentsum)
+        AdditiveCounter+=1
+    return(AdditiveCounter)
+print(AdditivePersistence(99999999999999999999999999999999999999999999999999999999999999999))
+
+
+# Have the function ArrayAdditionI(arr) take the array of numbers stored in arr and return the string true if any combination of numbers in the array can be added up to equal the largest number in the array, otherwise return the string false. For example: if arr contains [4, 6, 23, 10, 1, 3] the output should return true because 4 + 6 + 10 + 3 = 23. The array will not be empty, will not contain all the same elements, and may contain negative numbers. 
+import itertools 
+def ArrayAdditionI(arr): 
+  maxN = max(arr)
+  for i in range(2, len(arr)):
+    for item in itertools.combinations(arr,i):
+      if sum(item)==maxN:
+        return "true"
+  return "false"
+print (ArrayAdditionI([32,10,40,5,10,1,3,5,73]))
+
+
+
+
+#Check if number is power of 2
+def PowersofTwo(num): 
+    return math.log(num,2)==math.floor(round(math.log(num,2)))
+print (PowersofTwo(8192))
+
+
+#print 3rd longest string in array
+def ThirdGreatest(strArr): 
+    print (strArr)
+    return sorted([(word, -len(word)) for word in strArr], key=lambda x: x[1])[2][0]
+ss=[ "hello", "world", "after1", "all"]
+print (ThirdGreatest(ss))
+
+
+
+#Swap case of characters in string
+def SwapCase(str): 
+    #one line solution:
+    #return "".join([i.lower() if i.isupper() else i.upper() for i in str])
+    print (str)
+    news=""
+    for c in str:
+        if c.lower()==c:
+            news+=c.upper()
+        elif c.upper()==c:
+            news+=c.lower()
+        else:
+            news+=c
+    return news
+print (SwapCase("MarkISl93weR"))
+
+
+
+#Sum numbers in string
+def NumberAddition(str): 
+    def isnumber(n):
+        if n>='0' and n<='9':
+            return True
+        return False
+    print (str)
+    i=0
+    totalsum=0
+    while i<len(str):
+        tnum=0
+        needincreament=1
+        while i<len(str) and isnumber(str[i]):
+            if isnumber(str[i]):
+                tnum=tnum*10+int(str[i])
+            i+=1
+            needincreament=0
+        if needincreament==1:
+            i+=1
+        if tnum: print(tnum,"+")
+        totalsum+=tnum
+    return totalsum
+print (NumberAddition("Ma45k0120er34tj200s991"))
+
+
+#insert dashes ('-') between each two odd numbers in str
+def DashInsert(str): 
+    def odd(n):
+        return (int(n)%2==1)
+    print("checking ",str)
+    newstr=""
+    i=0
+    while i<len(str):
+        if odd(str[i]) and odd(str[i-1]) and i>0:
+            newstr+="-"+str[i]
+            i+=1
+        if i<len(str):
+            if odd(str[i]) and odd(str[i-1]) and i>0:
+                newstr+="-"
+            newstr+=str[i]
+        i+=1
+    return(newstr)
+print (DashInsert("777773055544448899281274727777"))
+
+
 #count number of instances of each character in a string
 sentence="This is a nice long sentence with many words"
 count={}
@@ -454,7 +742,7 @@ for i in range(0, len(n)):
 
 # Tuples are like lists, but read only; defined via ( but accessed as list, by [ 
 tuple = ( 'abcd', 786 , 2.23, 'john', 70.2  )
-print (tuple[1:3]) # Will print (786, 2.23)
+print (tuple[1:3]) # Will print (786, 2.23)  ---> places #1,#2
 
 
 """
@@ -737,6 +1025,28 @@ def LetterChanges(str):
 print (LetterChanges("hello*3"))
 
 
+#perform a Caesar Cipher shift using num is shifting number counter
+def CaesarCipher(str,num):
+    def Cipher(c,num):
+        if c.islower() and ord(c)+num>ord("z"):
+            c=chr  (                     ord('a')+num-(ord('z')-ord(c)+1    ))
+        elif c.isupper() and ord(c)+num>ord("Z"):
+            c=chr  (                     ord('A')+num-(ord('Z')-ord(c)+1    ))
+        else:
+            c=chr(ord(c)+num)
+        return c
+
+    print(str)
+    print ("".join(chr((ord('a') if i.islower() else ord('A'))+(ord(i)-(ord('a') if i.islower() else ord('A'))+num)%26) if i.isalpha() else i for i in str))
+    newstr=""
+    for c in str:
+        if c.isalpha():
+            newstr+=Cipher(c,num)
+        else:
+            newstr+=c
+    return (newstr)
+print (CaesarCipher("Hello tx12121aZ!!!!aaZZxx yywsDSsadfadf2 Beay",4))
+
 
 # for the string to be true each letter must be surrounded by a + symbol
 def SimpleSymbols(str): 
@@ -817,6 +1127,43 @@ print ("Ah, so your name is %s, your quest is %s, " \
 
 
 
+
+
+#calculate difference between two times; returns minutes
+def CountingMinutesI(str):  #9:00am-10:00am 60; 1:00pm-11:00am 1320 
+    """
+    09:15
+    9:15
+    11:15
+    00:15
+    1:01 
+    1:11 
+    """
+    
+    print (str)
+    s=str.split("-")
+    s1=s[0].split(":")
+    start_24=s[0][-2:]
+    start_h=int(s1[0])
+    start_m=int(s1[1][0:len(s1[1])-2])
+    
+    s1=s[1].split(":")
+    finish_24=s[1][-2:]
+    finish_h=int(s1[0])
+    finish_m=int(s1[1][0:len(s1[1])-2])
+    
+    if start_24==finish_24: #same time zone
+        if start_h<finish_h or (start_h==finish_h and finish_m>=start_m) :  # Simple
+            return 60*(finish_h-start_h)+finish_m-start_m
+        else:        
+            return 12*60+60*(12-start_h)-start_m+60*finish_h+finish_m
+    return 12*60-start_h*60-start_m+60*finish_h+finish_m
+    
+result=CountingMinutesI("4:10am-1:08pm")        
+print (result, "Minutes; ",int(result/60),":",result%60," in hours")   
+
+
+
 #binary
 twelve =0b1100
 """
@@ -894,6 +1241,29 @@ print (cubes_by_four)
 
 
 
+
+# finds mode (most repeated item in an array
+def MeanMode(arr): 
+
+  print (arr)
+  print ("mean=",statistics.mean(arr))
+  print ("mode=",statistics.mode(arr))
+  print ("mode=",max(arr, key = arr.count))
+    
+  arr.sort()
+  i=0
+  totalmax=0
+  while i<len(arr)-1:
+      currentmax=0
+      while arr[i]==arr[i+1]:
+          currentmax+=1 # increase recurrence 
+          i+=1      # goes to next items
+      if totalmax<currentmax:
+          maxitem=arr[i-1]
+          totalmax=currentmax
+      i+=1
+  print ("my mode is",maxitem,"it is repeated %d times"%totalmax)
+(MeanMode([12,3,2,3,5,10,3,8,10,-3,8,0,0,-3,8,10,5,-8,11,-8,-8,-8,20,3,-8]))
 
 
 #Classes #1
