@@ -1,4 +1,24 @@
-#Exercise 17
+#Exercise 19
+import requests
+from bs4 import BeautifulSoup
+
+r = requests.get("http://www.vanityfair.com/society/2014/06/monica-lewinsky-humiliation-culture")
+soup = BeautifulSoup(r.text,"html.parser")
+ 
+for story_heading in soup.find_all(class_="story-heading"): 
+    if story_heading.a: 
+        print(story_heading.a.text.replace("\n", " ").strip().encode('utf-8'))
+    else: 
+        print(story_heading.contents[0].strip().encode('utf-8'))
+
+print ("==================Done==================")
+quit()
+
+quit ()
+
+
+
+#Exercise 18
 import random
 
 def checkit(secret,userguess,cows,bulls):
@@ -27,11 +47,11 @@ if __name__=="__main__":
     
 
 print ("\n=====================Awesome!  You guessed the right number in",tries,"tries.=====================")
-quit ()
 
 
 
 
+#Exercise 17
 import requests
 from bs4 import BeautifulSoup
 
