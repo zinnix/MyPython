@@ -1,6 +1,101 @@
+
+#Exercise 20
+#binary search of a number in a sorted list
+
+import random
+def findbinary(listnums,mynum):
+    istart=0
+    iend=len(listnums)-1
+    while True:
+        i=int(round((iend-istart)/2))+istart
+        if listnums[i]==mynum:
+            return(True)       
+        if listnums[i]>mynum:
+            iend=int(round((iend-istart)/2))+istart
+        else:
+            istart=int(round((iend-istart)/2))+istart
+        if mynum>listnums[i] and mynum<listnums[i+1]:
+            return(False)
+while True:
+    listnums=sorted((random.sample(range(250),35)))
+    mynum=random.sample(range(listnums[0],listnums[len(listnums)-1]),1)[0]
+    print(listnums,mynum,findbinary(listnums,mynum))
+    x=input("any key")
+
+quit()
+
+
+
+import random
+mynum=random.sample(range(200),1)[0]
+listnums=sorted((random.sample(range(500),20)))
+def findbinary(listnums,mynum):
+    i=int(round(len(listnums)/2,0))
+    while i in range (0,len(listnums)):
+        if listnums[i]==mynum:
+            return(True)
+        if listnums[i]>mynum:
+            if listnums[i-1]<mynum:
+                return(False)
+            else:
+                i-=1
+        else:
+            if listnums[i-1]>mynum:
+                return(False)
+            else:
+                i+=1
+    return(False)
+print ( listnums,mynum,findbinary(listnums,mynum))
+
+quit()
+
+
+
+
+
 #Exercise 19
 import requests
 from bs4 import BeautifulSoup
+
+
+res = requests.get("http://www.vanityfair.com/society/2014/06/monica-lewinsky-humiliation-culture")
+soup = BeautifulSoup(res.text, "html.parser")
+data1=soup.find_all('div',{"class:","dek"})
+for item in data1:
+    pass #print (item.text.encode('utf-8'))
+data2=soup.find_all('section',{"class:","content-section"})
+for item in data2:
+    print (item.text.encode('utf-8'))
+    print()
+
+#for lines in soup.find_all('p'):
+#    print(str(lines.getText()).encode('utf-8'))
+
+
+
+
+
+
+
+
+
+
+import requests
+from bs4 import BeautifulSoup
+
+base_url = "http://www.vanityfair.com/society/2014/06/monica-lewinsky-humiliation-culture"
+r = requests.get(base_url)
+soup = BeautifulSoup(r.text)
+
+all_p_cn_text_body = soup.select("div.parbase.cn_text > div.body > p")
+
+for elem in all_p_cn_text_body[7:]:
+  print(elem.text)
+
+
+
+
+
 
 r = requests.get("http://www.vanityfair.com/society/2014/06/monica-lewinsky-humiliation-culture")
 soup = BeautifulSoup(r.text,"html.parser")
